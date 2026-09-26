@@ -1,5 +1,5 @@
 export type Node={id:string;type:"company"|"brand"|"subbrand"|"series"|"model";name:string;parent?:string;year?:string;desc:string;tags:string[]};
-export const nodes:Node=[
+export const nodes:Node[]=[
 {id:"samsung",type:"company",name:"Samsung Electronics",desc:"South Korean electronics company and corporate home of Samsung mobile products.",tags:["South Korea","Android"]},
 {id:"samsung-brand",type:"brand",name:"Samsung",parent:"samsung",desc:"Samsung mobile-device brand.",tags:["Galaxy"]},
 {id:"galaxy-s",type:"series",name:"Galaxy S",parent:"samsung-brand",desc:"Samsung flagship smartphone family.",tags:["Flagship"]},
