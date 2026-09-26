@@ -1,0 +1,23 @@
+export type Node={id:string;type:"company"|"brand"|"subbrand"|"series"|"model";name:string;parent?:string;year?:string;desc:string;tags:string[]};
+export const nodes:Node=[
+{id:"samsung",type:"company",name:"Samsung Electronics",desc:"South Korean electronics company and corporate home of Samsung mobile products.",tags:["South Korea","Android"]},
+{id:"samsung-brand",type:"brand",name:"Samsung",parent:"samsung",desc:"Samsung mobile-device brand.",tags:["Galaxy"]},
+{id:"galaxy-s",type:"series",name:"Galaxy S",parent:"samsung-brand",desc:"Samsung flagship smartphone family.",tags:["Flagship"]},
+{id:"galaxy-s25",type:"model",name:"Galaxy S25",parent:"galaxy-s",year:"2025",desc:"Galaxy S flagship generation.",tags:["Android","5G"]},
+{id:"galaxy-a",type:"series",name:"Galaxy A",parent:"samsung-brand",desc:"Samsung mainstream Galaxy family.",tags:["Mid-range"]},
+{id:"apple",type:"company",name:"Apple",desc:"Technology company behind iPhone.",tags:["USA","iOS"]},
+{id:"iphone",type:"brand",name:"iPhone",parent:"apple",desc:"Apple smartphone product family.",tags:["iOS"]},
+{id:"iphone-16",type:"series",name:"iPhone 16",parent:"iphone",year:"2024",desc:"iPhone 16 generation.",tags:["iOS"]},
+{id:"xiaomi",type:"company",name:"Xiaomi Corporation",desc:"Consumer electronics company with Xiaomi, Redmi and POCO mobile brands.",tags:["China","Android"]},
+{id:"xiaomi-brand",type:"brand",name:"Xiaomi",parent:"xiaomi",desc:"Xiaomi primary smartphone brand.",tags:["HyperOS"]},
+{id:"redmi",type:"subbrand",name:"Redmi",parent:"xiaomi",desc:"Xiaomi smartphone sub-brand.",tags:["Value"]},
+{id:"redmi-note",type:"series",name:"Redmi Note",parent:"redmi",desc:"Redmi long-running Note family.",tags:["Android"]},
+{id:"poco",type:"subbrand",name:"POCO",parent:"xiaomi",desc:"Performance-focused smartphone brand originating within Xiaomi.",tags:["Performance"]},
+{id:"transsion",type:"company",name:"Transsion",desc:"Mobile-device group behind TECNO, Infinix and itel.",tags:["China","Android"]},
+{id:"tecno",type:"brand",name:"TECNO",parent:"transsion",desc:"Global smartphone brand.",tags:["Android"]},
+{id:"infinix",type:"brand",name:"Infinix",parent:"transsion",desc:"Global smartphone brand focused on youth and performance.",tags:["Android"]},
+{id:"itel",type:"brand",name:"itel",parent:"transsion",desc:"Mobile brand serving accessible device segments.",tags:["Android"]},
+{id:"google",type:"company",name:"Google",desc:"Technology company behind Pixel smartphones.",tags:["USA","Android"]},
+{id:"pixel",type:"brand",name:"Pixel",parent:"google",desc:"Google hardware smartphone family.",tags:["Android","AI"]},
+{id:"motorola-owner",type:"company",name:"Lenovo",desc:"Technology group that owns Motorola Mobility.",tags:["China"]},
+{id:"motorola",type:"brand",name:"Motorola",parent:"motorola-owner",desc:"Smartphone brand operated by Motorola Mobility.",tags:["Android"]}];
