@@ -24,8 +24,19 @@ export default function Home() {
     try{
       const res=await fetch(\`/api/web-search?q=\${encodeURIComponent(webQ.trim())}\`);
       const data=await res.json();
-      if(!res.ok) throw new Error(data.error || "Search failed");
+      if(!res.ok){
+        const message = data.error || "Search failed";
+        if(res.status===503){
+          setWebError(message + " You can still search the web directly below.");
+          const fallbackUrl = "https://www.google.com/search?q=" + encodeURIComponent(webQ.trim());
+          window.open(fallbackUrl, "_blank", "noopener,noreferrer");
+        } else {
+          setWebError(message);
+        }
+        return;
+      }
       setWebResults(data.results || []);
+      if((data.results || []).length===0) setWebError("No results found. Try a more specific model name.");
     }catch(e){setWebError(e instanceof Error ? e.message : "Search failed");}
     finally{setWebLoading(false);}
   }
