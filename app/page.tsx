@@ -22,7 +22,7 @@ export default function Home() {
     if(!webQ.trim()) return;
     setWebLoading(true); setWebError("");
     try{
-      const res=await fetch(\`/api/web-search?q=\${encodeURIComponent(webQ.trim())}\`);
+      const res=await fetch(`/api/web-search?q=${encodeURIComponent(webQ.trim())}`);
       const data=await res.json();
       if(!res.ok){
         const message = data.error || "Search failed";
@@ -157,7 +157,6 @@ export default function Home() {
       <p>The site stores every entity as a node with a parent relationship. That lets us add historical phones, regional variants, rebrands and new launches without redesigning the tree.</p>
       <div className="chips">{["Ownership","Brands","Sub-brands","Series","Generations","Models","Variants","Launch years","Regions","Sources"].map(x=><span key={x}>{x}</span>)}</div>
     </section>
-
 
     <section className="webSearchSection">
       <div className="eyebrow">LIVE WEB SEARCH</div>
