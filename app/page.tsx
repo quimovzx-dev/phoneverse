@@ -166,7 +166,7 @@ export default function Home() {
       <div className="webSearchBox">
         <Search size={21}/>
         <input value={webQ} onChange={e=>setWebQ(e.target.value)} onKeyDown={e=>{if(e.key==="Enter")searchWeb()}} placeholder="Search the internet for a phone model..." aria-label="Search the internet"/>
-        <button onClick={searchWeb} disabled={webLoading}>{webLoading?"Searching...":"Search web"}</button>
+        <button type="button" className="webSearchButton" onClick={searchWeb} disabled={webLoading} aria-label="Search the web"><Search size={17}/>{webLoading?"Searching...":"Search web"}</button>
       </div>
       {webError && <div className="webError">{webError}</div>}
       {webResults.length>0 && <div className="webResults">{webResults.map((r,i)=><a className="webResult" href={r.url} target="_blank" rel="noreferrer" key={r.url+i}><div><span>{r.source}</span><h3>{r.title}</h3><p>{r.description}</p><small>{r.url}</small></div><ArrowUpRight size={17}/></a>)}</div>}
