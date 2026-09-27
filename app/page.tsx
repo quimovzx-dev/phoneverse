@@ -13,6 +13,23 @@ const labels: Record<Node["type"], string> = {
 
 export default function Home() {
   const [q,setQ]=useState("");
+  const [webQ,setWebQ]=useState("");
+  const [webLoading,setWebLoading]=useState(false);
+  const [webResults,setWebResults]=useState<{title:string;url:string;description:string;source:string}[]>([]);
+  const [webError,setWebError]=useState("");
+
+  async function searchWeb(){
+    if(!webQ.trim()) return;
+    setWebLoading(true); setWebError("");
+    try{
+      const res=await fetch(\`/api/web-search?q=\${encodeURIComponent(webQ.trim())}\`);
+      const data=await res.json();
+      if(!res.ok) throw new Error(data.error || "Search failed");
+      setWebResults(data.results || []);
+    }catch(e){setWebError(e instanceof Error ? e.message : "Search failed");}
+    finally{setWebLoading(false);}
+  }
+
   const [selected,setSelected]=useState<Node>(nodes[0]);
   const [expanded,setExpanded]=useState<Record<string,boolean>>({});
   const companies=nodes.filter(n=>n.type==="company");
@@ -128,6 +145,20 @@ export default function Home() {
       <h2>Built to scale from hundreds to thousands of models.</h2>
       <p>The site stores every entity as a node with a parent relationship. That lets us add historical phones, regional variants, rebrands and new launches without redesigning the tree.</p>
       <div className="chips">{["Ownership","Brands","Sub-brands","Series","Generations","Models","Variants","Launch years","Regions","Sources"].map(x=><span key={x}>{x}</span>)}</div>
+    </section>
+
+
+    <section className="webSearchSection">
+      <div className="eyebrow">LIVE WEB SEARCH</div>
+      <h2>Search beyond PhoneVerse.</h2>
+      <p className="webIntro">Search the wider web for a phone model, review, specification, launch, price or article. Results open directly on the source website.</p>
+      <div className="webSearchBox">
+        <Search size={21}/>
+        <input value={webQ} onChange={e=>setWebQ(e.target.value)} onKeyDown={e=>{if(e.key==="Enter")searchWeb()}} placeholder="Search the internet for a phone model..." aria-label="Search the internet"/>
+        <button onClick={searchWeb} disabled={webLoading}>{webLoading?"Searching...":"Search web"}</button>
+      </div>
+      {webError && <div className="webError">{webError}</div>}
+      {webResults.length>0 && <div className="webResults">{webResults.map((r,i)=><a className="webResult" href={r.url} target="_blank" rel="noreferrer" key={r.url+i}><div><span>{r.source}</span><h3>{r.title}</h3><p>{r.description}</p><small>{r.url}</small></div><ArrowUpRight size={17}/></a>)}</div>}
     </section>
 
     <section id="about" className="about">
