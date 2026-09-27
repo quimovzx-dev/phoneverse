@@ -178,3 +178,5 @@ export default function Home() {
     <footer><span>PHONEVERSE © 2026</span><span>Built for the world's phone history.</span></footer>
   </main>;
 }
+
+// Force a fresh Vercel build after the web-search syntax fix.
